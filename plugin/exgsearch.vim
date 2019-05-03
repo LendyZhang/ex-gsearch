@@ -29,6 +29,10 @@ if !exists('g:ex_gsearch_enable_help')
     let g:ex_gsearch_enable_help = 1
 endif
 
+if !exists('g:ex_gsearch_lid_cmd')
+    let g:ex_gsearch_lid_cmd = 'lid'
+endif
+
 "}}}
 
 " commands {{{1
