@@ -188,7 +188,7 @@ to 1.
 
                                                     *g:ex_gsearch_engine*
 g:ex_gsearch_engine~
-Default: "ag"
+Default: "rg"
 
 ------------------------------------------------------------------------------
 HIGHLIGHT COLOURS                                     *exgsearch-highlighting*

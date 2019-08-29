@@ -17,7 +17,7 @@ if !exists('g:ex_gsearch_ignore_case')
 endif
 
 if !exists('g:ex_gsearch_engine')
-    let g:ex_gsearch_engine = "ag"
+    let g:ex_gsearch_engine = "rg"
 endif
 
 if !exists('g:ex_gsearch_enable_sort')
@@ -43,9 +43,7 @@ endif
 command! -n=1 -complete=customlist,ex#compl_by_symbol GS call exgsearch#search('<args>', '-s')
 command! -n=1 -complete=customlist,ex#compl_by_symbol GSW call exgsearch#search('<args>', '-w')
 command! -n=1 -complete=customlist,ex#compl_by_symbol GSR call exgsearch#search('<args>', '-r')
-command! EXGSearchCWordW call exgsearch#search(expand('<cword>'), '-w')
-command! EXGSearchCWordS call exgsearch#search(expand('<cword>'), '-s')
-command! EXGSearchCWordR call exgsearch#search(expand('<cword>'), '-r')
+command! EXGSearchCWord call exgsearch#search(expand('<cword>'), '-s')
 
 command! EXGSearchToggle call exgsearch#toggle_window()
 command! EXGSearchOpen call exgsearch#open_window()
@@ -53,13 +51,9 @@ command! EXGSearchClose call exgsearch#close_window()
 "}}}
 
 " default key mappings {{{1
-call exgsearch#register_hotkey( 1  , 1, '?'            , ":call exgsearch#toggle_help()<CR>"           , 'Toggle help.' )
-if has('gui_running')
-    call exgsearch#register_hotkey( 2  , 1, '<ESC>'           , ":EXGSearchClose<CR>"                         , 'Close window.' )
-else
-    call exgsearch#register_hotkey( 2  , 1, '<leader><ESC>'   , ":EXGSearchClose<CR>"                         , 'Close window.' )
-endif
-call exgsearch#register_hotkey( 3  , 1, 'z'         , ":call exgsearch#toggle_zoom()<CR>"           , 'Zoom in/out project window.' )
+call exgsearch#register_hotkey( 1  , 1, '<F1>'            , ":call exgsearch#toggle_help()<CR>"           , 'Toggle help.' )
+call exgsearch#register_hotkey( 2  , 1, 'q'               , ":EXGSearchClose<CR>"                         , 'Close window.' )
+call exgsearch#register_hotkey( 3  , 1, '<Space>'         , ":call exgsearch#toggle_zoom()<CR>"           , 'Zoom in/out project window.' )
 call exgsearch#register_hotkey( 4  , 1, '<CR>'            , ":call exgsearch#confirm_select('')<CR>"      , 'Go to the search result.' )
 call exgsearch#register_hotkey( 5  , 1, '<2-LeftMouse>'   , ":call exgsearch#confirm_select('')<CR>"      , 'Go to the search result.' )
 call exgsearch#register_hotkey( 6  , 1, '<S-CR>'          , ":call exgsearch#confirm_select('shift')<CR>" , 'Go to the search result in split window.' )
@@ -68,10 +62,6 @@ call exgsearch#register_hotkey( 8  , 1, '<leader>r'       , ":exec 'Filter ' . @
 call exgsearch#register_hotkey( 9  , 1, '<leader>fr'      , ":exec 'FilterFile ' . @/<CR>"                , 'Filter files in search result.' )
 call exgsearch#register_hotkey( 10 , 1, '<leader>d'       , ":exec 'ReverseFilter ' . @/<CR>"             , 'Reverse filter search result.' )
 call exgsearch#register_hotkey( 11 , 1, '<leader>fd'      , ":exec 'ReverseFilterFile ' . @/<CR>"         , 'Reverse filter files in search result.' )
-call exgsearch#register_hotkey( 100, 0, '<leader>gs', ":EXGSearchToggle<CR>", 'Toggle global search window.' )
-call exgsearch#register_hotkey( 101, 0, '<leader>gg', ":EXGSearchCWordW<CR>", 'Search current word.(delimited word)' )
-call exgsearch#register_hotkey( 102, 0, '<leader>gw', ":EXGSearchCWordS<CR>", 'Search current word.(substring)' )
-call exgsearch#register_hotkey( 103, 0, '<leader>gr', ":EXGSearchCWordR<CR>", 'Search current word.(regexp)' )
 "}}}
 
 call ex#register_plugin( 'exgsearch', { 'actions': ['autoclose'] } )
